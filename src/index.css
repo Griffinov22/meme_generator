@@ -10,3 +10,109 @@
   margin: 0;
   font-family: var(--karla);
 }
+/* Header */
+nav {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background: linear-gradient(
+    to right,
+    rgba(103, 34, 128, 1),
+    rgba(166, 38, 211, 1)
+  );
+  height: 80px;
+  padding: 5px 20px;
+  color: white;
+}
+
+#nav-img {
+  width: 45px;
+  height: 40px;
+}
+
+#title {
+  font-size: 2em;
+  margin-right: auto;
+  letter-spacing: -0.1em;
+}
+
+#title-explanation {
+  font-family: var(--inter);
+  font-weight: 500;
+}
+/* textField section */
+
+section {
+  padding: 10% 5%;
+}
+
+section form {
+  width: 100%;
+  display: flex;
+  gap: 10%;
+  margin-bottom: 50px;
+}
+
+form input {
+  padding: 10px 15px;
+  width: 100%;
+  border: 2px solid grey;
+  border-radius: 15px;
+  font-size: 1.2em;
+  transition: all 1s;
+  font-family: var(--karla);
+}
+
+form input:hover::placeholder {
+  color: black;
+}
+form input:hover {
+  border-color: black;
+}
+
+#create-btn {
+  width: 100%;
+  padding: 15px 0;
+  color: white;
+  background: linear-gradient(
+    to right,
+    rgba(113, 31, 141, 1),
+    rgba(168, 24, 218, 1)
+  );
+  font-family: var(--karla);
+  font-weight: 700;
+  font-size: 1.4em;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+/* Text-Field  */
+.pic-div {
+  position: relative;
+  width: 80%;
+  margin: 0 auto;
+}
+
+#meme-render {
+  display: block;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.meme-text {
+  position: absolute;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 2.5em;
+}
+
+#text-top {
+  top: 2%;
+}
+
+#text-bottom {
+  bottom: 2%;
+}
