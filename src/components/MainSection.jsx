@@ -8,7 +8,7 @@ function MainSection() {
   // breaking at 450px for 'bottom caption'
   const below450 = window.innerWidth < 450;
 
-  const [memeObj, setMemeURL] = React.useState({
+  const [memeObj, setMemeObj] = React.useState({
     memeImg: defaultIMG,
     topText: "Placeholder",
     bottomText: "Placeholder",
@@ -20,7 +20,7 @@ function MainSection() {
       Math.random() * (memesArray.length + 1)
     );
     // access the a random object in the array of memes and get the url key's value
-    setMemeURL((oldObj) => ({
+    setMemeObj((oldObj) => ({
       ...oldObj,
       memeImg: memesArray[randomNumInArray].url,
     }));
@@ -35,6 +35,16 @@ function MainSection() {
     });
   }
 
+  function holdCap(e) {
+    //either 'top-input' or 'bottom-input'
+    const target = e.target.id;
+    const text = e.target.value;
+
+    target === "top-input"
+      ? setMemeObj((oldObj) => ({ ...oldObj, topText: text }))
+      : setMemeObj((oldObj) => ({ ...oldObj, bottomText: text }));
+  }
+
   return (
     <>
       <section>
@@ -42,14 +52,16 @@ function MainSection() {
           <input
             id="top-input"
             type="text"
-            className="cap"
+            className="caption-input"
             placeholder={below450 ? "top" : "top caption"}
+            onChange={holdCap}
           />
           <input
             id="bottom-input"
             type="text"
-            className="cap"
+            className="caption-input"
             placeholder={below450 ? "bottom" : "bottom caption"}
+            onChange={holdCap}
           />
         </form>
 
