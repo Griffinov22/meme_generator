@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 import "../index.css";
-import data from "../memesData.js";
 import defaultIMG from "/memeimg.png";
 
 function MainSection() {
@@ -13,18 +12,25 @@ function MainSection() {
     topText: "Placeholder",
     bottomText: "Placeholder",
   });
+  const [allMemes, setMemes] = React.useState([]);
 
   function getMemeURL() {
-    const memesArray = data.data.memes;
-    const randomNumInArray = Math.floor(
-      Math.random() * (memesArray.length + 1)
-    );
+    //allMemes = [{...},{...},{...}]
+    const randomNumInArray = Math.floor(Math.random() * (allMemes.length + 1));
     // access the a random object in the array of memes and get the url key's value
     setMemeObj((oldObj) => ({
       ...oldObj,
-      memeImg: memesArray[randomNumInArray].url,
+      memeImg: allMemes[randomNumInArray].url,
     }));
   }
+
+  useEffect(() => {
+    // Only called once because it returns an array of 100 memes
+
+    fetch("https://api.imgflip.com/get_memes")
+      .then((res) => res.json())
+      .then((apiRes) => setMemes(apiRes.data.memes));
+  }, []);
 
   function changeTextColor(e) {
     // getting color from the id name
@@ -32,17 +38,17 @@ function MainSection() {
     const texts = document.querySelectorAll(".meme-text");
     texts.forEach((el) => {
       el.style.color = color;
+      // changes outline of text if the text is black
+      el.style["-webkit-text-stroke"] =
+        color === "black" ? "1px white" : "1px black";
     });
   }
 
   function holdCap(e) {
     //either 'top-input' or 'bottom-input'
-    const target = e.target.id;
-    const text = e.target.value;
+    const { name, value } = e.target;
 
-    target === "top-input"
-      ? setMemeObj((oldObj) => ({ ...oldObj, topText: text }))
-      : setMemeObj((oldObj) => ({ ...oldObj, bottomText: text }));
+    setMemeObj((oldObj) => ({ ...oldObj, [name]: value }));
   }
 
   return (
@@ -54,6 +60,7 @@ function MainSection() {
             type="text"
             className="caption-input"
             placeholder={below450 ? "top" : "top caption"}
+            name="topText"
             onChange={holdCap}
           />
           <input
@@ -61,6 +68,7 @@ function MainSection() {
             type="text"
             className="caption-input"
             placeholder={below450 ? "bottom" : "bottom caption"}
+            name="bottomText"
             onChange={holdCap}
           />
         </form>

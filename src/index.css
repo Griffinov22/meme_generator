@@ -65,6 +65,7 @@ form input {
   font-size: 1.2em;
   transition: all 1s;
   font-family: var(--karla);
+  transition: all 200ms;
 }
 
 form input:hover::placeholder {
@@ -72,6 +73,7 @@ form input:hover::placeholder {
 }
 form input:hover {
   border-color: black;
+  border: 3px solid black;
 }
 
 #create-btn {
@@ -150,7 +152,12 @@ form input:hover {
   margin: 0 auto;
   width: -moz-fit-content;
   width: fit-content;
-  font-size: 2.5em;
+  font-size: 2.3rem;
+  font-family: Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+  color: white;
+  text-transform: uppercase;
+  -webkit-text-stroke: 1px black;
+  letter-spacing: 0.01px;
 }
 
 #text-top {
